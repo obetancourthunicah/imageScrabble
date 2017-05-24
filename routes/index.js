@@ -11,4 +11,21 @@ router.get('/about', function(req, res, next){
 }
 );
 
+router.get('/signup', function(req,res,next){
+  res.render('register',{"txtEmail":"","msg":""});
+});
+
+var usersRegistered = [];
+
+router.post('/signup',function(req,res,next){
+  console.log(req.body);
+    usersRegistered.push(req.body.txtEmail);
+    // Para que conozcan map funcion de un arreglo
+    //var msgs = usersRegistered.map(function(item,i){return item}).join("|");
+    //var msgs = usersRegistered.join("|");
+    var msgs = usersRegistered;
+    var rtObject = {"txtEmail": req.body.txtEmail, "msg":msgs};
+  res.render('register', rtObject);
+});
+
 module.exports = router;
