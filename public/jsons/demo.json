@@ -1,0 +1,16 @@
+{
+  "nombre":"Orlando",
+  "apellido":"Betancourth",
+  "colores":["rojo","azul","verde"],
+  "direccion":{
+      "ciudad":"tegucigalpa",
+      "calle": 5,
+      "bloque":5
+    },
+  "amigos":[
+      {"nombre":"Manuel","correo":"as@as.com"},
+      {"nombre":"Gaby","correo":"asdf@.cas"},
+      {"nombre":"Silvia","correo":"fda@as.ce"}
+    ],
+  "casado":true
+}

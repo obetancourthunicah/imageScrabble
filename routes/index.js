@@ -24,8 +24,19 @@ router.post('/signup',function(req,res,next){
     //var msgs = usersRegistered.map(function(item,i){return item}).join("|");
     //var msgs = usersRegistered.join("|");
     var msgs = usersRegistered;
-    var rtObject = {"txtEmail": req.body.txtEmail, "msg":msgs};
+    var rtObject = {}; // {"txtEmail": req.body.txtEmail, "msg":msgs};
+    rtObject.txtEmail = req.body.txtEmail;
+    rtObject.msg= msgs;
   res.render('register', rtObject);
+});
+
+router.get('/api/usuarios', function(req,res,next){
+  var usuarios = [
+                {"user":"admin","rol":["admin","public"]},
+                {"user":"any","rol":["public"]},
+              ];
+  res.json(usuarios);
+
 });
 
 module.exports = router;
