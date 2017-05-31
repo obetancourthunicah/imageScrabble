@@ -36,7 +36,47 @@ router.get('/api/usuarios', function(req,res,next){
                 {"user":"any","rol":["public"]},
               ];
   res.json(usuarios);
-
 });
+
+// RESTful API --> HTTP(S) , POST(Insert), GET(Select), PUT(Update), DELETE(Delete)
+  //        Se manipulan a partir de la URL, Sin estado.
+
+  /// Image Scrabble Adminsitración
+  // Diccionario - > Palabras -> Ponderacion
+
+  var Diccionario = {
+                      "rookie":[],
+                      "junior":[],
+                      "senior":[],
+                      "master":[],
+                      "deity":[]
+                    };
+
+  var palabraTemplate = {
+                          "word":"",
+                          "word_length":0,
+                          "weight":1,
+                          "context":""
+                        };
+
+    router.get('/api/dictionary/:dictionaryKey', function(req,res,next){
+      var _dictionaryKey = req.params.dictionaryKey;
+      res.json(Diccionario[_dictionaryKey]);
+    });
+
+    router.post('/api/dictionary/:dictionaryKey/new', function(req,res,next){
+      // asumimos que el req.body contiene cada variables igual al objeto plantilla
+      var newWord = Object.assign({},palabraTemplate,req.body);
+      /*
+      var newOldWay = {};
+      newOldWay.word = req.body.word;
+      newOldWay.wieght = req.body.weight;
+      newOldWay.context = req.body.context;
+      newOldWay.word_length =  newOldWay.word.length;
+       */
+       newWord.word_length = newWord.word.length;
+       Diccionario[req.params.dictionaryKey].push(newWord);
+       res.status(200).json(Diccionario[req.params.dictionaryKey]);
+    });
 
 module.exports = router;
