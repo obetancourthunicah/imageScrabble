@@ -79,4 +79,44 @@ router.get('/api/usuarios', function(req,res,next){
        res.status(200).json(Diccionario[req.params.dictionaryKey]);
     });
 
+    router.put('/api/dictionary/:dictionaryKey/update/:word', function(req,res,next){
+      var newWord = Object.assign({},palabraTemplate,req.body);
+      var _dictionary = req.params.dictionaryKey;
+      var _word = req.params.word;
+      Diccionario[_dictionary] = Diccionario[_dictionary].map(function(current_word,i){
+        if(current_word.word===_word){
+          current_word = Object.assign(current_word, newWord);
+        }
+        return current_word;
+      });
+
+      res.status(200).json(Diccionario[_dictionary]);
+    });
+
+    router.delete('/api/dictionary/:dictionaryKey/delete/:word', function(req,res,next){
+      var _dictionary = req.params.dictionaryKey;
+      var _word = req.params.word;
+      Diccionario[_dictionary] = Diccionario[_dictionary].map(function(current_word,i){
+        if(current_word.word===_word){
+
+        }else{
+            return current_word;
+        }
+
+      });
+
+      res.status(200).json(Diccionario[_dictionary]);
+    });
+
 module.exports = router;
+
+
+
+
+/*
+ a = a,b,c,d
+ b =
+
+
+
+*/
